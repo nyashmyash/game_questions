@@ -1,0 +1,10 @@
+find_number/Debug/
+Debug/
+Release/
+ipch/
+/*.opensdf
+/*.pdb
+/*.suo
+/*.sdf
+/*.db
+/*.opendb
