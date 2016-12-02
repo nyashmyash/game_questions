@@ -6,10 +6,8 @@
 #include <stdlib.h>
 #include <windows.h>
 #include "Operation.h"
-#pragma comment (lib, "User32.lib")
 
 using namespace std;
-//простые числа на которые будет проверятся делимость
 vector<int> getprime_numb(int n)
 {
 	vector<char> prime(n + 1, true);
@@ -42,7 +40,6 @@ int getdigitsInPos(int k, int pos)
 	k = k / pow1(10, pos-1);
 	return k;
 }
-//количество цифр и сумма
 void cnt_sum_digits(int k, int &sum, int& cnt)
 {
 	cnt = 0;
@@ -61,22 +58,21 @@ bool testinput()
 	while (!ok)
 	{
 		char answ[100];
-		char tmp[100];
 		cin >> answ;
-		OemToChar(answ, tmp);
-		if (strcmp(tmp, "да") == 0)
+		
+		if (strcmp(answ, "yes") == 0)
 		{
 			ret = true;
 			ok = true;
 		}
-		if (strcmp(tmp, "нет") == 0)
+		if (strcmp(answ, "no") == 0)
 		{
 			ret = false;
 			ok = true;
 		}
 		if (!ok)
 		{
-			cout << "неверно набран ответ, должно быть да или нет, введите еще раз\n";
+			cout << "your answer incorrect\n";
 		}
 		else
 			ok = true;
@@ -91,13 +87,12 @@ bool opLess(int i, int j)
 {
 	return i < j;
 }
-//поведение
 
 struct behavior
 {
 	int cntop;
 	vector<Operation> oper;
-	vector<int>prime_numb;//простые числа
+	vector<int>prime_numb;
 	int prev_op_indx;
 	int mt;
 	int nt;
@@ -137,20 +132,20 @@ struct behavior
 			op.testinput = &testinput;
 			op.init(i);
 			if (i == ID_OP_DEV_DIG)
-				op.setquestion("делится ли ваше число на ");
+				op.setquestion("the number is divisible by ");
 			if (i == ID_OP_DEV_SUM)
-				op.setquestion("делится ли сумма цифр вашего числа на ");
+				op.setquestion("the sum of digits of the number is divisible by ");
 			if (i == ID_OP_DEV_CNT)
-				op.setquestion("делится ли количество цифр числа на ");
+				op.setquestion("the number of digits is divisible by ");
 			if (i == ID_OP_GREAT)
 			{
 				op.poperation = opGreat;
-				op.setquestion("ваше число больше ");
+				op.setquestion("the number larger than ");
 			}
 			if (i == ID_OP_LESS)
 			{
 				op.poperation = opLess;
-				op.setquestion("ваше число меньше ");
+				op.setquestion("the number less than ");
 			}
 			
 			oper.push_back(op);
@@ -176,15 +171,15 @@ int max_(int i, int j)
 int main()
 {
 	int m = 100;
-	int n = 1110109900;
+	int n = 100000;
 	bool debug = 0;
-	int find_k = 175190;
+	int find_k = 6666;
 	int alg = 2;
 	setlocale(LC_ALL, "Russian");
 	
 	if (!debug)
 	{
-		cout << "введите границы значений m и n:\n";
+		cout << "input m and n:\n";
 		bool ok = false;
 		while (!ok)
 		{
@@ -194,7 +189,7 @@ int main()
 			n = atoi(nch);
 			if (n == 0 || m == 0 || n < m || (n + m) <0)
 			{
-				cout << "неверные значения, введите еще раз\n";
+				cout << "your answer incorrect\n";
 			}
 			else
 
@@ -214,7 +209,7 @@ int main()
 		if (alg == 1)
 		{
 			int ind = (n + m) / 2;
-			cout << "ваше число больше " << ind << "? (да/нет)" << endl;
+			cout << "a number larger than " << ind << "? (yes/no)" << endl;
 			if ((debug&&(find_k > ind)) || ((!debug)&&testinput()))
 			{
 				m = ind + 1;
@@ -231,12 +226,12 @@ int main()
 		{
 			if (m < 0 || n < 0)
 			{
-				cout << "ответ неверен, значение не найдено\n";
+				cout << "answer incorrect\n";
 				break;
 			}
 			int v = (n + m) / 2;
 			
-			if (cnt_q > 9)
+			//if (cnt_q > 9)
 			{
 				int tempv1 = v;
 				int tempv2 = v;
@@ -350,8 +345,8 @@ int main()
 		}
 		cnt_q++;
 	}
-	cout << "ваше число: " << n << endl;
-	cout <<"количество шагов " <<cnt_q << endl;
+	cout << "your number: " << n << endl;
+	cout <<"count steps: " <<cnt_q << endl;
 	if (debug) getchar();
 	else
 	{

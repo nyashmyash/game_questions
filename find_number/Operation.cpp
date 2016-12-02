@@ -42,7 +42,7 @@ void Operation::setindx(int indx)
 bool Operation::getanswer(vector<int>&prime_numb, bool debug, int find_k)
 {
 	bool ret;
-	cout << question << prime_numb[indx_prime] << "? (да/нет) ";
+	cout << question << prime_numb[indx_prime] << "? (yes/no) ";
 
 	if ((debug && (find_k% prime_numb[indx_prime] == 0)) || ((!debug) && testinput()))
 	{
@@ -56,8 +56,8 @@ bool Operation::getanswer(vector<int>&prime_numb, bool debug, int find_k)
 	}
 	if (debug)
 	{
-		if (ret) cout << "да\n";
-		else cout << "нет\n";
+		if (ret) cout << "yes\n";
+		else cout << "no\n";
 	}
 		else cout << "\n";
 	indx_prime++;
@@ -65,15 +65,15 @@ bool Operation::getanswer(vector<int>&prime_numb, bool debug, int find_k)
 }
 bool Operation::getanswer(bool debug, int find_k,int v)
 {
-	cout << question << v << "? (да/нет) ";
+	cout << question << v << "? (yes/no) ";
 	if ((debug && (poperation(find_k,v))) || ((!debug) && testinput()))
 	{
-		if (debug) cout << "да\n"; else cout << "\n";
+		if (debug) cout << "yes\n"; else cout << "\n";
 		return true;
 	}
 	else
 	{
-		if (debug)cout << "нет\n"; else cout << "\n";
+		if (debug)cout << "no\n"; else cout << "\n";
 		return false;
 	}
 }
