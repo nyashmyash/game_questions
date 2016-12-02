@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <windows.h>
 #include "Operation.h"
+#pragma comment (lib, "User32.lib")
 
 using namespace std;
 //простые числа на которые будет проверятся делимость
@@ -176,7 +177,7 @@ int main()
 {
 	int m = 100;
 	int n = 1110109900;
-	bool debug = 1;
+	bool debug = 0;
 	int find_k = 175190;
 	int alg = 2;
 	setlocale(LC_ALL, "Russian");
@@ -235,6 +236,27 @@ int main()
 			}
 			int v = (n + m) / 2;
 			
+			if (cnt_q > 9)
+			{
+				int tempv1 = v;
+				int tempv2 = v;
+				int tempm = m;
+				int tempn = n;
+				beh.change_mn(tempm, tempv1);
+				beh.change_mn(tempv2, tempn);
+
+				if (tempm == -1 && tempv1 == -1)
+				{
+					m = tempv2; n = tempn;
+				}
+				
+				if (tempn == -1 && tempv2 == -1)
+				{
+					n = tempv1; m = tempm;
+				}
+				v = (n + m) / 2;
+				
+			}
 			if (cnt_q % 3 == 1)
 			{
 				if(beh.oper[ID_OP_GREAT].getanswer(debug, find_k, v))
